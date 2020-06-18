@@ -16,9 +16,9 @@
     </ng-container>
   
   
-    <ng-container matColumnDef="salesInvoiceCode">
+    <ng-container matColumnDef="documentSequenceCode">
       <th mat-header-cell *matHeaderCellDef>NUMBER</th>
-      <td mat-cell *matCellDef="let element"> {{element.salesInvoiceCode}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.documentSequenceCode}} </td>
     </ng-container>
   
     
@@ -55,9 +55,9 @@
             <a href="#">Link 3</a>-->
             <ul class="dropdown-content">
               <li>Fullfill</li>
-              <li (click)="Print(element)">Print</li>
-              <li>Email</li>
-              <li (click)="CloseTransaction(element)">Close</li>
+              <li>Print</li>
+              <li><span (click)="openWindow(element)" >Email</span> </li>
+              <li>Close</li>
             </ul>
           
         </span>
@@ -77,3 +77,5 @@
     showFirstLastButtons>
 </mat-paginator>
   </div>
+
+ 

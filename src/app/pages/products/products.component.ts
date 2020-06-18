@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
-import { Router, ActivatedRoute } from '@angular/router';
+import { MigrateButtonComponent } from '../migrate-button/migrate-button.component';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 
 @Component({
@@ -42,7 +44,31 @@ export class ProductsComponent {
         title: 'Status' ,
         type: 'string' ,
       }
+      // Details: //or something
+      // {
+      //   title:'Detail',
+      //   type:'html',
+      //   valuePrepareFunction:(cell,row)=>{
+      //     return `<a title="See Detail Product" href="pages/products/product_overview/${row.productId}/overview">Overview</a>`
+      //     // return `<a title="See Detail Product" [routerLink]="['products/product_overview/',${row.productId},'overview']" >Overview</a>`
+      //     // return `<a title="See Detail Product" (click)="goToDetails(${row.productId})">Overview</a>`
+      //   },
+      //   filter:false       
+      // },
 
+      // deskera_id: {
+      //   title: 'Deskera ID',
+      //   type: 'custom',
+      //   renderComponent: MigrateButtonComponent,
+      //   valuePrepareFunction: (cell, row) => {
+      //     return "PRODUCT"
+      //   },
+      //   onComponentInitFunction: (instance) => {
+      //     instance.updateResult.subscribe((rowData) => {
+      //       this.handleUpdatedUser(rowData);
+      //     });
+      //   }
+      // },
     },
   };
 

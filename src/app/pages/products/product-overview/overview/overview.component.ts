@@ -16,17 +16,18 @@ import { map, filter, concatMap } from 'rxjs/operators';
 export class OverviewComponent implements OnInit {
   id;
   product_Id;
+  productId;
   cont: Content;
   image_path: string;
   image_add;
+  prod_type = false;
+  sales_tax = false;
+  purchase_tax = false;
   purchaseAccount: Observable<string>;
   salesAccount: Observable<string>;
   trackedCost: Observable<string>;
   trackedInventory: Observable<string>;
   trackedStock: Observable<string>;
-  prod_type = false;
-  sales_tax = false;
-  purchase_tax = false;
   tax_sales: Observable<string>;
   tax_purchase: Observable<string>;
   purhase_account: string;
@@ -44,8 +45,23 @@ export class OverviewComponent implements OnInit {
     this.route.parent.paramMap.subscribe(params => {
       this.id = params.get('id');  
     });
+    // getting content of selected product
     this.content = this._dataService.getProductFromId(this.id);
     
+    //getting required parameter
+    this.content.subscribe(data=> {
+      this.productId = data.productId;
+      // this.image_path = data.images[0];
+      this._dataClientService.getImage(data.images[0]).subscribe(img=>{
+        this.image_add=img; } 
+      );
+    })
+    
+    // getting image address
+    // this._dataClientService.getImage(this.image_path).subscribe(img=>{
+    //   this.image_add=img; } 
+    // );
+
     this._dataClientService.getData().subscribe(data=> {
       for (let index = 0; index < data.content.length;  index++) {
         if(data.content[index].id == this.id) {
@@ -61,9 +77,7 @@ export class OverviewComponent implements OnInit {
           if (data.content[index].purchasePriceTaxInclusive) {
             this.purchase_tax=true;
           }
-          this._dataClientService.getImage(this.image_path).subscribe(img=>{
-            this.image_add=img; } 
-          );
+          
           if(this.cont.inventory) {
             this.trackedCost = this._dataClientService.pushAccountTracked(this.cont.purchaseAccountCode, this.cont.salesAccountCode, this.cont.inventory.costOfGoodsSoldAccountCode, this.cont.inventory.inventoryAccountCode, this.cont.inventory.stockAdjustmentAccountCode).pipe(map(arrs =>{
               let fl = arrs.filter(arr => arr.code === this.cont.inventory.costOfGoodsSoldAccountCode);
@@ -97,6 +111,7 @@ export class OverviewComponent implements OnInit {
             return (fl.length > 0) ? fl[0].name : null;
           }));
         }
+
         this.tax_purchase = this._dataClientService.pushTax(this.cont.purchaseTaxCode,this.cont.salesTaxCode).pipe(map(arrs =>{
           let fl = arrs.filter(arr => arr.type === "PURCHASE");
           return (fl.length > 0) ? fl[0].taxCode : null;
@@ -106,6 +121,7 @@ export class OverviewComponent implements OnInit {
           let fl = arrs.filter(arr => arr.type === "SALES");
           return (fl.length > 0) ? fl[0].taxCode : null;
         }));
+
         this.lastSales = this._dataService.getLastSales(this.product_Id).pipe(map(res=>((res.content)[0].salesInvoiceItems)[0].totalAmount));
         this.lastPur = this._dataService.getLastPurchase(this.product_Id).pipe(map(res=>((res.content)[0].purchaseInvoiceProducts)[0].totalAmount));
         this.commitedQuotes = this._dataService.pushQuantityQuotes(this.product_Id).pipe(map(res=>(res.productStockInfo)[0].receiptQuantity));
@@ -113,7 +129,6 @@ export class OverviewComponent implements OnInit {
         }
       }
     });
-    
    
   }
 

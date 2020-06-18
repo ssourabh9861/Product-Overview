@@ -50,9 +50,9 @@
             <a href="#">Link 3</a>-->
             <ul class="dropdown-content">
               <li>Fullfill</li>
-              <li (click)="Print(element)">Print</li>
-              <li>Email</li>
-              <li (click)="CloseTransaction(element)">Close</li>
+              <li>Print</li>
+              <li><span (click)="openWindow(element)" >Email</span> </li>
+              <li>Close</li>
             </ul>
           
         </span>
@@ -70,5 +70,29 @@
     [pageSizeOptions]="[5, 10, 25, 100]"
     showFirstLastButtons>
 </mat-paginator>
-</div>
+  
+  </div>
 
+  <ng-template #contentTemplate let-data>
+    <!-- <p>Here is the text provided via config: "{{ data.text }}"</p>
+    <form  [formGroup]="mailData" >
+       <div class="form-group">
+        <label for="senderId">To</label>
+        <input type="text" id="senderId" formControlName="sender" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="mailsubject">Subject</label>
+        <input type="text" id="mailsubject"formControlName="subject" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="mailbody">Body</label>
+        <textarea id="mailbody" cols="30" rows="10" formControlName="body" class="form-control"></textarea>
+      </div>
+
+
+      <button class="btn btn-primary" (click)="close()">Send</button>
+      <button class="btn btn-primary" (click)="close()">Cancel</button>
+    </form> -->
+
+    
+  </ng-template>

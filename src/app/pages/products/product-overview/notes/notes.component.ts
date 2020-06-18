@@ -1,8 +1,7 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import {NotesService} from './notes.service';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatSort} from "@angular/material/sort";
-import {Notes} from "../../data-variables/overview/notes";
+import { Component, OnInit } from '@angular/core';
+import { NbWindowService } from '@nebular/theme';
+import { NoteEditComponent } from './note-edit/note-edit.component';
+
 @Component({
   selector: 'ngx-notes',
   templateUrl: './notes.component.html',
@@ -10,18 +9,24 @@ import {Notes} from "../../data-variables/overview/notes";
 })
 export class NotesComponent implements OnInit {
 
-  ELEMENT_DATA : Notes[];
-  displayedColumns: string[] = ['creator_name','description','date'];
-  dataSource  = new MatTableDataSource<Notes>(this.ELEMENT_DATA);
-
-  constructor(private _notesService:NotesService) { }
-
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  heroes = [{
+    creator_name : 'Bayside Club',
+    description : 'Quotes pending',
+    date : '1 Feb 2020 4:30 am'
+  },
+  {creator_name : 'John Doe',
+    description : '2 bills partially pending',
+    date : '3 Mar 2020 7 pm'
+  }];
+  constructor(private windowService: NbWindowService) {}
 
   ngOnInit(): void {
-    this._notesService.getData().subscribe(data=>this.dataSource.data=data as Notes[]);
-    this.dataSource.sort = this.sort;
   }
-
+  openWindow() {
+    this.windowService.open(NoteEditComponent, { title: `Edit Note` });
+  }
+  openWindow1() {
+    this.windowService.open(NoteEditComponent, { title: `Create New Note` });
+  } 
 }
 

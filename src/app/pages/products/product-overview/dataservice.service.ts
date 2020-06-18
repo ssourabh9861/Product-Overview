@@ -37,12 +37,11 @@ export class DataService {
       
   //   }
   // }
-  getProductFromId(ID):Observable<Content>{
+  getProductFromId(ID: string):Observable<Content>{
     return this.dataClientService.getProductList().pipe(map(arrs =>{
-      let fl = arrs.filter(arr => arr.id === ID);
+      let fl = arrs.filter(arr => (arr.id).toString() === ID);
       return (fl.length > 0) ? fl[0] : null;
     }));
-    
   }
 
   getOrders(productId: string):Observable<IOrders>{
@@ -72,22 +71,6 @@ export class DataService {
   pushQuantityOrder(productId: string): Observable<any>{
     let option = {productVariantCodes: [productId], status: [""], warehouseCode: "string"};
     return this.http.post("https://api-dev.deskera.xyz/v1/orders/purchase/orderStockQuantities", option);
-  }
-
-  printRequest(payload:any):Observable<any>{
-    return this.http.post("https://api-dev.deskera.xyz/v1/template/exportDocument",payload,{responseType:'arraybuffer' as 'json'});
-  }
-  closeInvoice(id:number){
-    return this.http.patch("https://api-dev.deskera.xyz/v1/invoices/sales/"+id,{status:"CLOSED"});
-  }
-  closeQuote(id:number){
-    return this.http.patch('https://api-dev.deskera.xyz/v1/quotations/'+id,{status:"CLOSED"});
-  }
-  closeOrder(code:string){
-    return this.http.patch("https://api-dev.deskera.xyz/v1/orders/purchase?orderCode="+code,{status:"CLOSED"});
-  }
-  closeBill(id:number){
-    return this.http.patch("https://api-dev.deskera.xyz/v1/invoices/purchase/"+id,{status:"CLOSED"});
   }
 }
 

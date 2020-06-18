@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-lg-6 shopify-connect-div">
+      <nb-card>
+        <nb-card-header><img src="https://logos-download.com/wp-content/uploads/2016/10/Shopify_logo_wordmark.png"
+            style="width:100px;height:28px;"></nb-card-header>
+        <nb-card-body *ngIf="!connected; else connectedTemplate">
+            <form (ngSubmit)="connectShop()" [formGroup]="connectForm">
+                <input type="text"
+                    nbInput
+                    fullWidth
+                    placeholder="Shop"
+                    class="form-control"
+                    formControlName="shop">
+                <div class="buttons-row">
+                    <button type="submit" class="connect-button" nbButton status="success">Connect</button>
+                </div>
+            </form>
+        </nb-card-body>
+        <ng-template #connectedTemplate>
+            <!-- <nb-card-body>
+                Connected
+            </nb-card-body> -->
+            <nb-card-body>
+                <div class="buttons-row">
+                    <button type="submit" class="connect-button" nbButton status="success" disabled>Connected</button>
+                </div>
+            </nb-card-body>
+        </ng-template>
+      </nb-card>
+    </div>
+</div>

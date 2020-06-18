@@ -1,0 +1,6 @@
+<!-- 
+    <button class="btn btn-primary" *ngIf="!rowData.deskera_id; else hasValue" [disabled]="hasBeenClicked" (click)="onMigrateButtonClick(value)">Migrate</button>
+    <ng-template #hasValue>
+        {{rowData.deskera_id}}
+    </ng-template> -->
+    <button nbButton shape="semi-round" [routerLink]="['product_overview', renderValue]" status="primary">Product Overview</button>

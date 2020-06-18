@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductOverviewComponent implements OnInit {
   product_Id;
   public data_product : Content[];
-  contents: Content;
+  contents: Content = null;
   status: boolean;
   navLinks = [
     {path:"overview",label:"Overview"},

@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule } from '@nebular/theme';
+import { NbMenuModule, NbRouteTabsetModule, NbCardModule, NbTabsetModule, NbActionsModule, NbButtonModule, NbSelectModule, NbCheckboxModule, NbWindowModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
+import { DeskeraModule } from './deskera/deskera.module';
+import { ContactsModule } from './contacts/contacts.module';
 import { ProductsModule } from './products/products.module';
 import { ProductOverviewComponent } from './products/product-overview/product-overview.component';
 import { OverviewComponent } from './products/product-overview/overview/overview.component';
@@ -22,8 +26,11 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatCardModule} from '@angular/material/card';
 import {
   NbIconModule,
+  NbInputModule,
+  NbTreeGridModule,
 } from '@nebular/theme';
 import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   imports: [
@@ -31,7 +38,18 @@ import {MatIconModule} from '@angular/material/icon';
     ThemeModule,
     NbMenuModule,
     NbIconModule,
+    NbTabsetModule,
+    NbCardModule,
+    NbRouteTabsetModule,
+    NbActionsModule,
+    NbButtonModule,
+    NbSelectModule,
+    NbInputModule,
+    DashboardModule,
+    ECommerceModule,
     MiscellaneousModule,
+    DeskeraModule,
+    ContactsModule,
     ProductsModule,
     MatToolbarModule,
     MatTabsModule,
@@ -39,7 +57,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
   ],
   declarations: [
     PagesComponent,
@@ -50,8 +68,10 @@ import {MatIconModule} from '@angular/material/icon';
     InvoicesComponent,
     OrdersComponent,
     BillsComponent,
-    QuotesComponent
+    QuotesComponent,
+
   ],
+
   providers: [],
 })
 export class PagesModule {

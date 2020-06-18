@@ -21,12 +21,16 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { AuthGuard } from './auth-guard.service';
+import { MigrateButtonComponent } from './pages/migrate-button/migrate-button.component';
 import { CommonInterceptor } from './common-utils/http/common.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NoteEditComponent } from "./pages/products/product-overview/notes/note-edit/note-edit.component";
+import { EmailComponent } from "./pages/products/product-overview/transactions/invoices/email/email.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MigrateButtonComponent, EmailComponent, NoteEditComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -46,7 +50,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbWindowModule.forRoot(),
     CoreModule.forRoot(),
   ],
-  entryComponents: [],
+  entryComponents: [MigrateButtonComponent, EmailComponent, NoteEditComponent,],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

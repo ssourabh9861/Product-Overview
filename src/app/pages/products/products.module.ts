@@ -9,6 +9,7 @@ import {
 } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {MatIconModule} from '@angular/material/icon';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 
 
@@ -21,6 +22,9 @@ import {MatIconModule} from '@angular/material/icon';
     NbInputModule,
     Ng2SmartTableModule,
     MatIconModule,
+    ReactiveFormsModule,
+    FormsModule,
+
   ],
   declarations: [
     ProductsComponent,

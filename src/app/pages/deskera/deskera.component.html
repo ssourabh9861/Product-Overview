@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-lg-2">
+    <nb-stepper [selectedIndex]="currentStep" orientation="vertical" disableStepNavigation>
+      <nb-step [completed]="currentStep>0" label="Connect Deskera">
+      </nb-step>
+      <nb-step [completed]="currentStep>1" label="Connect Shopify">
+      </nb-step>
+      <nb-step [completed]="currentStep>2" label="Deskera Configs">
+      </nb-step>
+      <nb-step label="Sync">
+      </nb-step>
+    </nb-stepper>
+  </div>
+  <div class="col-lg-6 deskera-connect-div" *ngIf="currentStep===0">
+    <nb-card>
+      <nb-card-header><img src="https://care.deskera.com/hc/article_attachments/360058843874/deskera-logo-1.png"
+        style="width:100px;height:20px;"></nb-card-header>
+      <nb-card-body>
+          <div class="buttons-row">
+              <button (click)="connectDeskera()" class="connect-button" nbButton status="success">Connect</button>
+          </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-lg-6 shopify-connect-div" *ngIf="currentStep===1">
+    <nb-card>
+      <nb-card-header>
+        <img src="https://logos-download.com/wp-content/uploads/2016/10/Shopify_logo_wordmark.png"
+          style="width:100px;height:28px;"/>
+      </nb-card-header>
+      <nb-card-body>
+          <form (ngSubmit)="connectShop()" [formGroup]="connectForm">
+              <input type="text"
+                  nbInput
+                  fullWidth
+                  placeholder="Shop"
+                  class="form-control"
+                  formControlName="shop">
+              <div class="buttons-row">
+                  <button type="submit" class="connect-button" nbButton status="success">Connect</button>
+              </div>
+          </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-lg-6 deskera-connect-div" *ngIf="currentStep===2 && (taxesLoaded | async) && (accountsLoaded | async)">
+    <nb-card>
+      <nb-card-header><img src="https://care.deskera.com/hc/article_attachments/360058843874/deskera-logo-1.png"
+        style="width:100px;height:20px;"></nb-card-header>
+      <nb-card-body>
+        <form (ngSubmit)="onConfigSubmit(configForm.value)" [formGroup]="configForm">
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Product Purchase Tax</label>
+            <nb-select [formControl]="configForm.controls.productPurchaseTaxCode" class="dropdown" [selected]="taxes[0].code">
+              <nb-option *ngFor="let tax of taxes" [value]="tax.code">{{tax.name}}</nb-option>
+            </nb-select>
+          </div>
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Product Sales Tax</label>
+            <nb-select [formControl]="configForm.controls.productSalesTaxCode" class="dropdown" [selected]="taxes[0].code">
+              <nb-option *ngFor="let tax of taxes" [value]="tax.code">{{tax.name}}</nb-option>
+            </nb-select>
+          </div>
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Product Purchase Account</label>
+            <nb-select [formControl]="configForm.controls.productPurchaseAccountCode" class="dropdown" [selected]="accounts[0].code">
+              <nb-option *ngFor="let account of accounts" [value]="account.code">{{account.name}}</nb-option>
+            </nb-select>
+          </div>
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Product Sales Account</label>
+            <nb-select [formControl]="configForm.controls.productSalesAccountCode" class="dropdown" [selected]="accounts[0].code">
+              <nb-option *ngFor="let account of accounts" [value]="account.code">{{account.name}}</nb-option>
+            </nb-select>
+          </div>
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Cost of Goods Sold Account</label>
+            <nb-select [formControl]="configForm.controls.productCostOfGoodsSoldAccountCode" class="dropdown" [selected]="accounts[0].code">
+              <nb-option *ngFor="let account of accounts" [value]="account.code">{{account.name}}</nb-option>
+            </nb-select>
+          </div>
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Inventory Account</label>
+            <nb-select [formControl]="configForm.controls.productInventoryAccountCode" class="dropdown" [selected]="accounts[0].code">
+              <nb-option *ngFor="let account of accounts" [value]="account.code">{{account.name}}</nb-option>
+            </nb-select>
+          </div>
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Stock Adjustment Account</label>
+            <nb-select [formControl]="configForm.controls.productStockAdjustmentAccountCode" class="dropdown" [selected]="accounts[0].code">
+              <nb-option *ngFor="let account of accounts" [value]="account.code">{{account.name}}</nb-option>
+            </nb-select>
+          </div>
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Contact Payable Account</label>
+            <nb-select [formControl]="configForm.controls.contactPayableAccountCode" class="dropdown" [selected]="accounts[0].code">
+              <nb-option *ngFor="let account of accounts" [value]="account.code">{{account.name}}</nb-option>
+            </nb-select>
+          </div>
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Contact Receivable Account</label>
+            <nb-select [formControl]="configForm.controls.contactReceivableAccountCode"  class="dropdown" [selected]="accounts[0].code">
+              <nb-option *ngFor="let account of accounts" [value]="account.code">{{account.name}}</nb-option>
+            </nb-select>
+          </div>
+          <div class="row dropdown-row">
+            <label class="label col-sm-6 col-form-label">Warehouse</label>
+            <nb-select [formControlName]="productWarehouseCode" class="dropdown" selected="WH-0000001" disabled>
+              <nb-option value="WH-0000001">Primary Warehouse</nb-option>
+            </nb-select>
+          </div>
+          <div class="buttons-row">
+            <button type="submit" class="connect-button" nbButton status="success">Save</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-lg-6 deskera-connect-div"  *ngIf="currentStep===3">
+    <nb-card>
+      <nb-card-header>Sync</nb-card-header>
+      <nb-card-body>
+          <div class="buttons-row">
+              <button [disabled]="isSynced" (click)="sync()" class="connect-button" nbButton status="success">Sync</button>
+          </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

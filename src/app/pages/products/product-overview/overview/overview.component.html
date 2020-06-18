@@ -1,11 +1,10 @@
 <div id="overview">
+  <ng-container *ngIf="cont">
   <div id="header-box-top">
-    <ng-container *ngIf="cont">
     <span *ngIf="prod_type; else elseBlock" id="class-box" style="margin: 10px; margin-left: 20px; font-weight: 900; font-size: xx-large;">{{cont.inventory.availableQuantity}}</span>
-    </ng-container>
     <ng-template #elseBlock><span id="class-box" style="margin: 10px; margin-left: 20px; font-weight: 900; font-size: xx-large;">N/A</span></ng-template>
     <p id="data-box" style="font-size: small; color: gray; margin-left: 20px;">Available Quantity</p>
-  </div>
+  </div></ng-container>
   <div id="header-box">
     <span style="font-size: small; color: gray; margin: 10px; margin-left: 20px;">SGD</span><span style=" font-weight: 900; font-size: xx-large;">20.00</span>
     <p style="font-size: small; color: gray; margin-left: 20px;">Average Cost</p>
@@ -28,7 +27,7 @@
   <div id="left_box">
     <div id="box_title_top"> 
      <div id="title_content">
-      <b>General </b> 
+      <b>General  </b> 
      </div>
     </div>
     <!-- <div id="box_title_top"> 
@@ -41,8 +40,7 @@
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Type</span> <span style="font-weight: 600;">{{cont.type}}</span> </div>
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Code</span> <span style="font-weight: 600;">{{cont.productId}}</span> </div>
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Barcode</span> <span style="font-weight: 600;">{{cont.barcode}}</span> </div>
-    </ng-container> 
-    </div>
+    </ng-container></div>
 
   <div id="box_title"> 
     <div id="title_content">
@@ -50,12 +48,11 @@
     </div>
    </div>
   <div  id="box_content">
-    <ng-container *ngIf="cont">
-      <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Purchase Account</span> <span style="font-weight: 600;">{{purchaseAccount | async}}</span> </div>
-      <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Purchase Price</span> <span style="font-weight: 600;">{{cont.purchasePrice}}</span> </div>
+    <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Purchase Account</span> <span style="font-weight: 600;">{{purchaseAccount | async}}</span> </div>
+    <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Purchase Price</span> <span style="font-weight: 600;">{{(content |async)?.purchasePrice}}</span> </div>
     <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Purchase Tax</span> <span style="font-weight: 600;">{{tax_purchase | async}}</span> </div>
     <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Purchase is tax inclusive </span> <span *ngIf="purchase_tax==true" style="font-weight: 600;">Yes</span> <span *ngIf="purchase_tax==false" style="font-weight: 600;">No</span> </div>
-    </ng-container></div>
+  </div>
 
   <div id="box_title"> 
     <div id="title_content">
@@ -64,21 +61,19 @@
    </div>
    <div *ngIf="prod_type">
     <div id="box_content">
-      <ng-container *ngIf="cont">
-        <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Account</span> <span style="font-weight: 600;">{{salesAccount |async}}</span> </div>
-        <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Price</span> <span style="font-weight: 600;">{{cont.salesPrice}}</span> </div>
+      <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Account</span> <span style="font-weight: 600;">{{salesAccount |async}}</span> </div>
+      <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Price</span> <span style="font-weight: 600;">{{(content |async)?.salesPrice}}</span> </div>
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Tax</span> <span style="font-weight: 600;">{{tax_sales | async}}</span> </div>
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales is tax inclusive </span> <span *ngIf="sales_tax==true" style="font-weight: 600;">Yes</span> <span *ngIf="sales_tax==false" style="font-weight: 600;">No</span> </div>
-      </ng-container></div>  
+    </div>  
    </div>
    <div *ngIf="!prod_type">
     <div id="box_content_last">
-      <ng-container *ngIf="cont">
-        <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Account</span> <span style="font-weight: 600;">{{salesAccount |async}}</span> </div>
-        <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Price</span> <span style="font-weight: 600;">{{cont.salesPrice}}</span> </div>
+      <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Account</span> <span style="font-weight: 600;">{{salesAccount |async}}</span> </div>
+      <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Price</span> <span style="font-weight: 600;">{{(content |async)?.salesPrice}}</span> </div>
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales Tax</span> <span style="font-weight: 600;">{{tax_sales | async}}</span> </div>
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Sales is tax inclusive </span> <span *ngIf="sales_tax==true" style="font-weight: 600;">Yes</span> <span *ngIf="sales_tax==false" style="font-weight: 600;">No</span> </div>
-    </ng-container></div>  
+    </div>  
    </div>
   <div *ngIf="prod_type">
     <div id="box_title"> 
@@ -91,7 +86,7 @@
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Cost of Goods Sold</span> <span style="font-weight: 600;">{{trackedCost |async}} </span> </div>
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Inventory Account</span> <span style="font-weight: 600;">{{trackedInventory |async}} </span> </div>
       <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Stock Adjustment Account</span> <span style="font-weight: 600;">{{trackedStock |async}} </span> </div>
-     </div>  
+    </div>  
 
   <div id="box_title"> 
     <div id="title_content">
@@ -99,10 +94,10 @@
     </div>
    </div>
    <div id="box_content_last">
-    <ng-container *ngIf="cont">
+     <ng-container *ngIf="cont">
     <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Opening Quantity</span> <span style="font-weight: 600;">{{cont.inventory.openingQuantity}}</span> </div>
     <div id="content"> <span style="color: gray; margin-right: 15px; font-weight: 550;">Opening Valuation</span> <span style="font-weight: 600;">{{cont.inventory.openingValuation}}</span> </div>
-    </ng-container></div>  
+  </ng-container></div> 
   </div>
 </div>
   <div id="right_box">
@@ -123,7 +118,7 @@
     <div id="content"> <span style=" margin-right: 15px; font-weight: 700;">Description</span> <p  style="font-weight: 550;">{{cont.description}}</p> </div>
     <div id="content"> <span style=" margin-right: 15px; font-weight: 700;">Distance</span> <p  style="font-weight: 400; "></p> </div>
     <div id="content"> <span style=" margin-right: 15px; font-weight: 700;">Durability</span> <p  style="font-weight: 400; "></p> </div>
-    </ng-container></div>
+  </ng-container></div>
 
   <div id="box_title"> 
     <div id="title_content">
