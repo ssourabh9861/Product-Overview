@@ -1,0 +1,52 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+.navbar {
+  border: 0.1px solid #888888;
+  padding: 10px;
+  box-shadow: 0.5px 0.5px 0.4px 0.5px #888888;
+}
+#image{
+  margin-top: 100px;
+}
+#box{
+  display:grid;
+  grid-template-columns: 20px 20px 73px 20px;
+  box-sizing: content-box;
+  height: 30px;
+}
+  span{
+    padding-right: 1rem;
+  }
+  .check{
+    width:90%;
+    margin: 10px auto;
+  }
+  .overview-header {
+    display: grid;
+    grid-template-columns: 16% 16% 16% 16% 16%;
+    margin-top: 25px ;
+    margin-left: 28px;
+  }
+
+  #navbar {
+    margin-left: 25px;
+    margin-right: 20%;
+  }
+  #tab{
+    margin-top: 10px;
+  }
+  .nav-link{
+    margin-left: 25px;
+  }
+  
+
+  #nav-bar-hor{
+    box-sizing: content-box;
+    display: grid;
+    grid-template-columns: 15% 15% 15% 15%;
+    box-shadow: darken($color: #000000, $amount: 0);
+    width: 100%;
+    height: 70px;
+  }
+  .dropdown-toggle::after {
+      display:none;
+  }

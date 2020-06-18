@@ -1,0 +1,27 @@
+table {
+    width: 100%;
+    padding: 10px;
+    
+  }
+.data-table{
+  width:100%;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+.align-right{
+display: flex;
+padding: 18px 0;
+justify-content: flex-end;
+margin-right: 25px;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+  }
+mat-paginator{
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}

@@ -1,0 +1,51 @@
+import { Address } from './address';
+import { IInvoiceItem } from './invoice_item';
+import { IInvoiceContact } from './invoice_contact';
+
+export interface IInvoiceContent
+{
+    openingInvoice: boolean,
+    totalAmount: number,
+    totalAmountInBaseCurrency: number,
+    payableAccountCode: string,
+    taxAmount: number,
+    openingDocumentNumber: string,
+    warehouseCode: string,
+    dropShip: string,
+    backOrder: boolean,
+    status: string,
+    customField: string,
+    attachmentIds: string,
+    contactCode: string,
+    linkedDocuments: Array<string>,
+    purchaseOrderRefNo: string,
+    journalEntryCode: string,
+    currency: string,
+    exchangeRate: number,
+    salesInvoiceDate: string,
+    salesInvoiceDueDate: string,
+    memo: string,
+    attachments: Array<string>,
+    unitPriceGstInclusive: boolean,
+    dueAmount: number,
+    withheldAmount: string,
+    recurring: boolean,
+    recurringActivated: boolean,
+    salesInvoiceItems: Array<IInvoiceItem>,
+    salesInvoiceRecurring: string,
+    contact: IInvoiceContact,
+    shipFrom: string,
+    shipTo: Address
+    billTo: Address,
+    shipByDate: string,
+    id: number,
+    salesInvoiceCode: string,
+    documentSequenceCode: string,
+    knockoffInfo: string,
+    tdsInfo: string,
+    draft: boolean,
+    paymentStatus: string,
+    fulfillmentStatus: string,
+    fulfillmentType: string,
+    contactDto: string
+  }

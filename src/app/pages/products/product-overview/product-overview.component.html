@@ -1,0 +1,66 @@
+<!-- <div id="head">
+  <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon> Products <span class="material-icons">keyboard_arrow_right</span> Products <span class="material-icons">keyboard_arrow_right</span> 
+</div> -->
+<div id="box">
+  <div><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon> </div> 
+  <div><mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon> </div>
+  <div style="margin-top:2px; font-weight: 550; font-size:large"> Products</div> 
+  <div><mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon> </div>
+</div>
+<ng-container *ngIf="contents">
+  <h1 style="margin: 10px; margin-left: 40px; margin-bottom: 20px;">
+    {{contents.name}} 
+  </h1>
+</ng-container>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <nb-icon icon="plus" status="danger"> </nb-icon> ADD 
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="https://reality-dev.deskera.xyz/books/sell/quote/create" target="_blank">Quote</a>
+          <a class="dropdown-item" href="https://reality-dev.deskera.xyz/books/sell/invoice/create" target="_blank">Invoice</a>
+          <a class="dropdown-item" href="https://reality-dev.deskera.xyz/books/buy/order/create" target="_blank">Purchase Order</a>
+          <a class="dropdown-item" href="https://reality-dev.deskera.xyz/books/buy/bill/create" target="_blank">Bill</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <ng-container *ngIf = "contents" >
+        <a class="nav-link" href="https://reality-dev.deskera.xyz/books/products/edit/{{contents.id}}" target="_blank"><nb-icon icon="edit-2" status="danger"> </nb-icon> EDIT</a>
+      </ng-container></li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="contact_details"><nb-icon icon="copy" status="danger"> </nb-icon> COPY</a>
+      </li>
+      <li class="nav-item active">
+        <ng-container *ngIf="status; else elseBlock">
+          <a class="nav-link"  (click)="toogle()"><nb-icon icon="slash" status="danger"> </nb-icon>  MARK INACTIVE</a>
+        </ng-container>
+        <ng-template #elseBlock>
+          <a class="nav-link" (click)="toogle()"><nb-icon icon="checkmark" status="danger"> </nb-icon>  MARK ACTIVE</a>
+        </ng-template>
+        <!-- <a class="nav-link" routerLink="notes" onclick='toogle()'><nb-icon icon="slash" status="danger"> </nb-icon>  MARK INACTIVE</a> -->
+      </li>
+      </ul>
+    </div>
+  </nav>
+
+
+<nav id="tab" mat-tab-nav-bar>
+  <a mat-tab-link
+     *ngFor="let link of navLinks"
+     [routerLink]="link.path"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive" style="color: black; text-decoration: none;">
+    {{link.label}}
+  </a>
+</nav>
+
+  <router-outlet></router-outlet>
+

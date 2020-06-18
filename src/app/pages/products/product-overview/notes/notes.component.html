@@ -1,0 +1,31 @@
+  <div id="header-box-top">
+    <div> <span style="margin-top: 10px; margin-left: 30px; font-weight: 900; font-size: xx-large;">{{dataSource.data.length}} </span>
+      <span style="margin-top: 10px; font-weight: 600; font-size: xx-large;">Notes </span>
+    </div>
+    <div style="box-sizing: content-box; justify-content: end;"><span style="margin-top: 5px; font-weight: 500; font-size: larger;">ADD NEW</span></div>
+</div>
+
+<div class="mat-elevation-z2 data-table">
+  <table mat-table [dataSource]="dataSource" matSort>
+  
+    <ng-container matColumnDef="creator_name">
+      <th mat-header-cell *matHeaderCellDef>CREATOR NAME </th>
+      <td mat-cell *matCellDef="let element"> {{element.creator_name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>DESCRIPTION</th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header ><span style=" display: inline; margin: 5px; margin-left: 10px;" >ACTIVITY DATE</span></th>
+      <td mat-cell *matCellDef="let element">   <div style="box-sizing: content-box; display: grid; grid-template-columns: 80% 20%; "> <div>{{element.date}}</div> <div><span class="material-icons  md-18" style="color: gray;">create</span> </div></div>      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: rgb(240, 238, 238); font-size: medium;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  </div>
+  

@@ -1,0 +1,11 @@
+<nav id="tab" mat-tab-nav-bar >
+  <a mat-tab-link
+     *ngFor="let link of navLinks"
+     [routerLink]="link.path"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive" style="box-sizing: content-box; height: 100px; background-color: white; color: black; width: 25%; text-decoration: none;" >
+    <div><span style="font-size: xx-large; font-weight: 900; margin-right: 5px;">{{link.value}}</span> <span style="font-weight: 500;">{{link.label}}</span> </div>
+  </a>
+</nav>
+
+<router-outlet></router-outlet>
